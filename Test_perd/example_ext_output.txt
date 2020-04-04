@@ -1,0 +1,7 @@
+project_id: 100%        (left_x: 6   top_y:   10   width:  5   height:    4)
+supplier: 100%  (left_x: 6   top_y:   10   width:  5   height:    4)
+gesamt_price: 100%      (left_x: 6   top_y:   10   width:  5   height:    5)
+invoice_details: 100%   (left_x: 6   top_y:   10   width:  5   height:    6)
+pos: 100%       (left_x: 6   top_y:   10   width:  5   height:    7)
+table: 100%     (left_x: 6   top_y:   10   width:  5   height:    6)
+address: 100%   (left_x: 6   top_y:   10   width:  5   height:    5)
