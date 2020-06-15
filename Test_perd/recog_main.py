@@ -5,13 +5,13 @@ import pytesseract
 from collections import defaultdict
 import json
 
-# from Test_perd.query_to_server import *
-cmd= ['/usr/local/primestone/darknet/darknet', 'detector','test\
-','/usr/local/primestone/darknet/data/custom_data/obj.data','/usr/local/primestone/darknet\
-/data/custom_data/yolo-obj.cfg','/usr/local/primestone/darknet/backup/yolo-obj_best.weights','-ext_output', '-dont_show']
+
+
 i=1
 class RcogPipe():
-    def __init__(self,command:str,pdf_pages:str) -> str:
+    def __init__(self,command,pdf_pages):
+
+
         print('class: RecogPipe has received following command\n\
               \nand following:pdf pageNo:',command,pdf_pages)
 
@@ -22,10 +22,15 @@ class RcogPipe():
         commnad is darknet command
         output: output is the output of darkent model with -ext_output argument
         '''
-        send_job = Popen(command, stdin=PIPE, stdout=PIPE,stderr=PIPE, universal_newlines=True)
+
+
+
+
+
+        send_job = Popen(command, stdin=PIPE, stdout=PIPE,stderr=PIPE, universal_newlines=True  )
         self.out=send_job.communicate(pdf_pages)
         print('Darknet model internal view:\n',self.out[0])
-        #return out[0]
+            #return out[0]
 
     def  mapping(self):
         '''
@@ -68,7 +73,7 @@ class RcogPipe():
         box_height = int(ext_output[9][:-1])
         area = (point_left_x, point_top_y, (point_left_x + box_width), (point_top_y + box_height))
         return area
-    #i=1
+    i=1
     def crop_image(self,image, area: Tuple) -> object:
         ''' Uses PIL to crop an image, given its area.
         Input:
@@ -76,15 +81,15 @@ class RcogPipe():
             Area - Coordinates in tuple (xmin, ymax, xmax, ymin) format '''
         img1 = Image.open(image)
         img = img1.crop(area)
-        basewidth = 200
-        wpercent = (basewidth / float(img.size[0]))
-        hsize = int((float(img.size[1]) * float(wpercent)))
-        cropped_image = img.resize((basewidth, hsize), Image.ANTIALIAS)
-        global i
-        #cropped_image.save("r" + str(i) + ".jpg", "JPEG", dpi=(300, 300))
-        i += 1
+        # basewidth = 200
+        # wpercent = (basewidth / float(img.size[0]))
+        # hsize = int((float(img.size[1]) * float(wpercent)))
+        # cropped_image = img.resize((basewidth, hsize), Image.ANTIALIAS)
+        # global i
+        # img.save("r" + str(i) + ".jpg", "JPEG", dpi=(800, 800))
+        # i += 1
 
-        return cropped_image
+        return img
 
     def bbox_img_pairs(self,image, lines="") -> List:
         ''' Determines where an asset is in the picture, returning
@@ -134,16 +139,19 @@ class RcogPipe():
 
                 # is excluding the class, all coordinate tuple like(3,4,1,2)== to img_bbx pair that is like\
                 # [(coordinate),img objt] 0 to unravel the list and 0 for tuple of coordinates
-                text = pytesseract.image_to_string(elm[1], lang='deu')
+                text = pytesseract.image_to_string(elm[1],lang='deu',config='--psm 6 --tessdata-dir /usr/share/tesseract-ocr/4.00/tessdata')#--oem
                 # print(bbx[0][1])
                 class_text = i[0]
-
-                print('following class:Text has been extracted by ORC engine',class_text[0],text)
-                output_dict[class_text].append(text)
-                print('appending single page data dictionary')
+                #count=1
+                if text is not '':
+                    print('following class:Text has been extracted by ORC engine',class_text,text)
+                    output_dict[class_text].append(text)
+                    #output_dict['pageNo'].append(count)
+                    #count+=1
+                    print('appending single page data dictionary')
 
         #json_dict=json.dumps(output_dict)
-        print('single dictionary has been compated')
+        print('single dictionary has been completed')
         return output_dict
 
 

@@ -5,3 +5,33 @@ invoice_details: 100%   (left_x: 6   top_y:   10   width:  5   height:    6)
 pos: 100%       (left_x: 6   top_y:   10   width:  5   height:    7)
 table: 100%     (left_x: 6   top_y:   10   width:  5   height:    6)
 address: 100%   (left_x: 6   top_y:   10   width:  5   height:    5)
+
+
+
+Geometriy:
+center of bbox is top lef (0,0) Px:
+left_x, top_y,width,height
+header measurement (0,336,2480,716)
+footer measurement (0,3172,2480,316)
+the formua is
+crop_x=left_x+width+offset# pos1
+crop_y= same as pos1
+crop_width= corp_x+(crop_x-2480)
+crop_hight= crop_y_p1+(crop_y_p1-left_x_p2)
+
+##########
+
+footer: x,y,w,h
+x offset 220, y= 3100,550,404
+220,2900,770,404
+90,3192,582,296
+228,3024,640,200
+160,3182,424,160
+198,3108,677,319
+expected:
+100,3000,770,500
+
+required parameters:
+pos1= left_x, width,crop_y
+pos2=left_x_p2
+

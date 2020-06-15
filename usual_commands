@@ -1,0 +1,39 @@
+#Rexeg command
+r'([0-9]+)|((([1-9][0-9]*)|([0-9]))([.,])[0-9]{1,2})$")' # to possibly extract the value of euro
+r'\d{0,5}[\.,]\d{0,5},?\d+# for heldele'
+
+# cleaning the decriptions:
+unit= (?P<unit>(\d+.\d+,?\d+)|(\d+\s*))\s*(Stk|M|EUR|Stück|€LITE|PSCH|Pschl|TO|StMt|psch\
+|qmx|stWo|qm x|st|Stück|ifdm)
+currency=(?P<cur>(\d+[,.]\d+,?\d+))
+
+combined= ((?P<unit>(\d+.\d+,?\d+)|(\d+\s*))\s*(Stk|M|EUR|Stück|€|LITE|PSCH|Pschl|TO|StMt|psch
+|qmx|stWo|qm x|st|Stück|ifdm)|(?P<cur>(\d+[,.]\d+,?\d+)))
+
+###################################################
+for Darknet
+http://http://10.1.4.114:8090 to see the result on remote server http://37.24.84.90:8090/
+
+darknet.exe detector train data/obj.data data/yolo-obj.cfg darknet53.conv.74 -dont_show -mjpeg_port 8090 -map
+
+#linux system
+./darknet detector train ./data/custom_data/obj.data ./data/custom_data/yolo-obj.cfg darknet53.conv.74 -map
+
+# transfer files form windows to linux server:
+pscp -r C:\Users\fkhalil\primeStone\darknet\darknet53.conv.74 fkhalil@10.1.2.13:/usr/local/primestone/darknet/
+instructions:
+assumes that pscp putty exe. is instal on window.
+Run this command on windows command prompt.
+############
+to see the mounted drive for linux subsystem:
+df -h
+#########
+on linux mountpoint
+
+[lsbk]  to see the mount points
+[df -h] to see the filesystem
+########
+changn the grop ownership linux
+chown -R fkhalil:fkhalil ..   R= recursive, fkahlil group name, fkahlilgroup 2 name and '..' = path of directory
+
+

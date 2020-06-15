@@ -5,7 +5,7 @@
       <paths name="fkhalil@nvidia01:22">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/pycharm_project_509" local="$PROJECT_DIR$" web="/usr/local/primestone/docrecog/pycharm_ws " />
+            <mapping deploy="/usr/local/primestone/docrecog/pycharm_ws" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>
